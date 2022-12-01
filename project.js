@@ -26,8 +26,8 @@ const view = new MapView({
   container: "viewDiv",
   map: map,
   //coordinates in Lat/Long
-  center: [-118.24532,34.05398],
-  zoom: 12
+  center: [-75.690966,45.407608],
+  zoom: 13
 });
 
 //When The Map is Clicked
