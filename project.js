@@ -9,47 +9,50 @@ require([
   "esri/rest/route",
   "esri/rest/support/RouteParameters",
   "esri/rest/support/FeatureSet",
-  "esri/layers/FeatureLayer"
+  "esri/layers/FeatureLayer",
+  "esri/layers/RouteLayer",
+  "esri/rest/support/PolylineBarrier"
 
-], function(esriConfig, Map, MapView, Graphic, route, RouteParameters, FeatureSet, FeatureLayer) {
+], function(esriConfig, Map, MapView, Graphic, route, RouteParameters, FeatureSet, FeatureLayer, RouteLayer, PolylineBarrier) {
 
-//API Key used by ArcGIS account for ryanmritchie@cmail.carleton.ca
-esriConfig.apiKey = "AAPKcb9f61203d3948828a04e7e5db1590cagaUCTuu6Mh2E_3BIFP2MQgj_BC0ukAfcal5bqKJcWgXI8uB-Czu8ME9i6hLlR0Yn";
-//URL supplied by ArcGIS REST API service for route optimization
-const routeUrl = "https://route-api.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World";
+  //API Key used by ArcGIS account for ryanmritchie@cmail.carleton.ca
+  esriConfig.apiKey = "AAPKcb9f61203d3948828a04e7e5db1590cagaUCTuu6Mh2E_3BIFP2MQgj_BC0ukAfcal5bqKJcWgXI8uB-Czu8ME9i6hLlR0Yn";
+  //URL supplied by ArcGIS REST API service for route optimization
+  const routeUrl = "https://route-api.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World";
 
-const constructionRenderer = {
-  "type": "simple",
-  "symbol": {
-    "type": "simple-line",
-    'color': "#FF0000",
+
+  const constructionRenderer = {
+    "type": "simple",
+    "symbol": {
+      "type": "simple-line",
+      'color': "#FF0000",
+    }
   }
-}
 
-const construction = new FeatureLayer({
-  url: "https://maps.ottawa.ca/arcgis/rest/services/ConstructionForecastData/MapServer/0",
-  definitionExpression: "STATUS='INPROGRESS'",
-  renderer: constructionRenderer
-});
+  const construction = new FeatureLayer({
+    url: "https://maps.ottawa.ca/arcgis/rest/services/ConstructionForecastData/MapServer/0",
+    definitionExpression: "STATUS='INPROGRESS'",
+    renderer: constructionRenderer
+  });
 
-const ottawaRoads = new FeatureLayer({
-  url: "https://maps.ottawa.ca/arcgis/rest/services/Streets/MapServer/3"
-});
+  const ottawaRoads = new FeatureLayer({
+    url: "https://maps.ottawa.ca/arcgis/rest/services/Streets/MapServer/3"
+  });
 
 
-const map = new Map({
-  //Default Map Service Provided by ArcGIS
-  basemap: "arcgis-navigation" ,
-  layers: [construction, ottawaRoads]
-});
-
-const view = new MapView({
-  container: "viewDiv",
-  map: map,
-  //coordinates in Long/Lat
-  center: [-75.690966,45.407608],
-  zoom: 13
-});
+  const map = new Map({
+    //Default Map Service Provided by ArcGIS
+    basemap: "arcgis-navigation" ,
+    layers: [construction, ottawaRoads]
+  });
+  
+  const view = new MapView({
+    container: "viewDiv",
+    map: map,
+    //coordinates in Long/Lat
+    center: [-75.690966,45.407608],
+    zoom: 13
+  });
 
 
 //When The Map is Clicked
@@ -75,6 +78,9 @@ view.on("click", function(event){
         const routeParams = new RouteParameters({
           stops: new FeatureSet({
             features: view.graphics.toArray()
+          }),
+          polylineBarriers: new FeatureSet({
+            url: "https://maps.ottawa.ca/arcgis/rest/services/ConstructionForecastData/MapServer/0"
           }),
   
           returnDirections: true
@@ -106,15 +112,12 @@ view.on("click", function(event){
                direction.innerHTML = result.attributes.text + " (" + result.attributes.length.toFixed(2) + " miles)";
                directions.appendChild(direction);
              });
-  
+
             view.ui.empty("top-right");
             view.ui.add(directions, "top-right");
-  
            }
   
-          })
-  
-          .catch(function(error){
+          }).catch(function(error){
               console.log(error);
           })
   
