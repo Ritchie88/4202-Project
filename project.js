@@ -500,6 +500,87 @@ require([
     }
   }];
 
+  var floodedAreas = [
+    new PolygonBarrier({
+      barrierType: "restriction",
+      geometry: {
+        rings: [[
+          [-75.6812175, 45.38923793],
+          [-75.6810904, 45.38934338],
+          [-75.6806284, 45.38916146],
+          [-75.6807324, 45.38901661]
+        ]]
+      }
+    }),
+    new PolygonBarrier({
+      barrierType: "restriction",
+      geometry: {
+        rings: [[
+          [-75.699776537328, 45.391510296695],
+          [-75.699462091046, 45.391845876136],
+          [-75.699197164394, 45.391788497524],
+          [-75.699484374655, 45.391409448359]
+        ]]
+      }
+    }),
+    new PolygonBarrier({
+      barrierType: "restriction",
+      geometry: {
+        rings: [[
+          [-75.671581655393, 45.400283441457],
+          [-75.671235466242, 45.400606622543],
+          [-75.670948286524, 45.400548615769],
+          [-75.671251202031, 45.400175714648]
+        ]]
+      }
+    }),
+    new PolygonBarrier({
+      barrierType: "restriction",
+      geometry: {
+        rings: [[
+          [-75.678173546847, 45.393016909449],
+          [-75.677896136308, 45.393147988777],
+          [-75.677803322372, 45.393071948320],
+          [-75.678084857976, 45.392932902648]
+        ]]
+      }
+    }),
+    new PolygonBarrier({
+      barrierType: "restriction",
+      geometry: {
+        rings: [[
+          [-75.669943008839, 45.404059101929],
+          [-75.669590315885, 45.404088788157],
+          [-75.669501627014, 45.403737620812],
+          [-75.669741911980, 45.403661594605]
+        ]]
+      }
+    }),
+    new PolygonBarrier({
+      barrierType: "restriction",
+      geometry: {
+        rings: [[
+          [-75.673442422978, 45.398418902493],
+          [-75.673332410797, 45.398543561919],
+          [-75.673237369040, 45.398516682233],
+          [-75.673340330344, 45.398386455548]
+        ]]
+      }
+    }),
+    new PolygonBarrier({
+      barrierType: "restriction",
+      geometry: {
+        rings: [[
+          [-75.680633344301, 45.390104734350],
+          [-75.680543813708, 45.390171419925],
+          [-75.680416300548, 45.390068533397],
+          [-75.680511256965, 45.390022805710]
+        ]]
+      }
+    })
+  ];
+
+
   //API Key used by ArcGIS account for ryanmritchie@cmail.carleton.ca
   esriConfig.apiKey =
     "AAPKcb9f61203d3948828a04e7e5db1590cagaUCTuu6Mh2E_3BIFP2MQgj_BC0ukAfcal5bqKJcWgXI8uB-Czu8ME9i6hLlR0Yn";
