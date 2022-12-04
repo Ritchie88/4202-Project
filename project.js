@@ -10,6 +10,7 @@ require([
   "esri/rest/support/FeatureSet",
   "esri/layers/FeatureLayer",
   "esri/rest/support/PolylineBarrier",
+  "esri/rest/support/PolygonBarrier",
 ], function (
   esriConfig,
   Map,
@@ -21,7 +22,8 @@ require([
   Directions,
   FeatureSet,
   FeatureLayer,
-  PolylineBarrier
+  PolylineBarrier,
+  PolygonBarrier
 ) {
   const json = {
     displayFieldName: "FORECAST_ID",
@@ -449,6 +451,55 @@ require([
     ],
   };
 
+  const tornadoData = [{
+    geometry: {
+      rings: [
+        [
+          [-75.782997,45.33172],
+          [-75.762595,45.335367],
+          [-75.758122,45.327362],
+          [-75.77657,45.320529]
+        ]
+      ]
+    }
+    },
+  {
+    geometry: {
+      rings: [
+        [
+          [-75.78302, 45.33172],
+          [-75.77661, 45.32039],
+          [-75.79009, 45.31637],
+          [-75.79778, 45.32983]
+        ]
+      ]
+    }
+  },
+  {
+    geometry: {
+      rings: [
+        [
+          [-75.902665, 45.29633],
+          [-75.91502, 45.315003],
+          [-75.882358, 45.321368],
+          [-75.872449, 45.303130]
+        ]
+      ]
+    }
+  },
+  {
+    geometry: {
+      rings: [
+        [
+          [-75.84415, 45.31742],
+          [-75.817419, 45.328664],
+          [-75.81006, 45.317100],
+          [-75.83166, 45.31357]
+        ]
+      ]
+    }
+  }];
+
   //API Key used by ArcGIS account for ryanmritchie@cmail.carleton.ca
   esriConfig.apiKey =
     "AAPKcb9f61203d3948828a04e7e5db1590cagaUCTuu6Mh2E_3BIFP2MQgj_BC0ukAfcal5bqKJcWgXI8uB-Czu8ME9i6hLlR0Yn";
@@ -477,7 +528,18 @@ require([
   routeLayer.stops = stops;
   routeLayer.polylineBarriers = polylineBarriers;
 
-  console.log(routeLayer.polylineBarriers.length);
+  const tornado = [];
+  for(let i = 0; i < tornadoData.length ; i++){
+    tornado.push(new PolygonBarrier({
+      barrierType: "restriction",
+      geometry: tornadoData[i].geometry,
+    }));
+  }
+
+  routeLayer.polygonBarriers = tornado;
+
+  console.log(routeLayer.polygonBarriers.length);
+
 
   const map = new Map({
     //Default Map Service Provided by ArcGIS
