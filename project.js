@@ -1,3 +1,5 @@
+
+
 require([
   "esri/config",
   "esri/Map",
@@ -25,7 +27,7 @@ require([
   PolylineBarrier,
   PolygonBarrier
 ) {
-  const json = {
+  const construction = {
     displayFieldName: "FORECAST_ID",
     fieldAliases: { FEATURE_TYPE: "Type of Work", STATUS: "STATUS" },
     geometryType: "esriGeometryPolyline",
@@ -451,7 +453,9 @@ require([
     ],
   };
 
-  const tornadoData = [{
+  const tornadoData = [
+    new PolygonBarrier ({
+    barrierType: "restriction",
     geometry: {
       rings: [
         [
@@ -462,8 +466,9 @@ require([
         ]
       ]
     }
-    },
-  {
+    }),
+    new PolygonBarrier ({
+    barrierType: "restriction",
     geometry: {
       rings: [
         [
@@ -474,8 +479,9 @@ require([
         ]
       ]
     }
-  },
-  {
+  }),
+  new PolygonBarrier ({
+    barrierType: "restriction",
     geometry: {
       rings: [
         [
@@ -486,8 +492,9 @@ require([
         ]
       ]
     }
-  },
-  {
+  }),
+  new PolygonBarrier ({
+    barrierType: "restriction",
     geometry: {
       rings: [
         [
@@ -498,7 +505,8 @@ require([
         ]
       ]
     }
-  }];
+  })
+];
 
   var floodedAreas = [
     new PolygonBarrier({
@@ -580,50 +588,156 @@ require([
     })
   ];
 
+  const snowData = [
+    new PolylineBarrier({
+      barrierType: "restriction",
+      geometry: {
+        paths: [
+          [
+            [-75.6757887,45.4261675],
+            [-75.6771971,45.4276207]
+          ],
+          [
+            [-75.6757751,45.4260400],
+            [-75.6743932,45.4245574]
+          ],
+          [
+            [-75.6744172,45.4244022],
+            [-75.6730727,45.4230058]
+          ],
+          [
+            [-75.6731036,45.4228915],
+            [-75.6716920,45.4213761]
+          ],
+          [
+            [-75.6708178,45.4217195],[-75.6722498,45.4232510]
+          ],
+          [
+            [-75.6722433,45.4233599],[-75.6735697,45.4247754]
+          ],
+          [
+            [-75.6735428,45.4249131],[-75.6748879,45.4264287]
+          ],
+          [
+            [-75.6748864,45.4265270],[-75.6763489,45.4280165]
+          ],
+          [
+            [-75.6754642,45.4283933],[-75.6740425,45.4268505]
+          ],
+          [
+            [-75.6740423,45.4267685],[-75.6726669,45.4252764]
+          ],
+          [
+            [-75.6726908,45.4251935],[-75.6713435,45.4237335]
+          ],
+          [
+            [-75.6713510,45.4236631],[-75.6700256,45.4220336]
+          ]
+        ],
+        },
+    }),
+    new PolylineBarrier({
+      barrierType: "restriction",
+      geometry: {
+        paths: [
+          [
+           [ -75.68191, 45.42559 ], 
+           [ -75.68071, 45.42417 ]
+          ],
+          [
+           [ -75.68057, 45.42399],
+           [ -75.67933, 45.42250]
+          ],
+          [
+           [ -75.67926, 45.42243],
+           [ -75.67799, 45.42094]
+          ],
+          [
+           [ -75.67837, 45.42279],
+           [ -75.67711, 45.42133]
+          ],
+          [
+           [-75.67832,45.42285],
+           [-75.6797589,45.4244250]
+          ],
+          [
+           [ -75.67977, 45.42448],
+           [ -75.68105, 45.42606]
+          ],
+          [
+           [-75.6761916,45.4217541], [-75.6773765, 45.4232365]
+          ],
+          [
+           [-75.6773883,45.4232500], [-75.6787655, 45.4248121]
+          ],
+          [
+           [-75.6787902, 45.4248402], [-75.6801390, 45.4263386]
+          ],
+          [
+           [-75.6788686,45.4267377], [-75.6778013,45.4254019]
+          ],
+          [
+           [-75.6776190,45.4251567], [-75.6764392,45.423749]
+          ],
+          [
+           [-75.6762878,45.4235475], [-75.6750792,45.4222163]
+          ],
+          [
+           [-75.6749849,45.4220776], [-75.6736569,45.4205220]
+          ],
+          [
+           [-75.6725824,45.4209638], [-75.6739401,45.4225143]
+          ],
+          [
+           [-75.6739716,45.4225988], [-75.6752697,45.4240608]
+          ],
+          [
+           [-75.6753080,45.4241813], [-75.6766714,45.4256512]
+          ],
+          [
+           [-75.6767390,45.4257848], [-75.6779984,45.4272503]
+          ]
+        ],
+      },
+    })
+  ];
 
-  //API Key used by ArcGIS account for ryanmritchie@cmail.carleton.ca
-  esriConfig.apiKey =
-    "AAPKcb9f61203d3948828a04e7e5db1590cagaUCTuu6Mh2E_3BIFP2MQgj_BC0ukAfcal5bqKJcWgXI8uB-Czu8ME9i6hLlR0Yn";
-  //URL supplied by ArcGIS REST API service for route optimization
-  const routeUrl =
-    "https://route-api.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World";
-
+  esriConfig.apiKey = "AAPKcb9f61203d3948828a04e7e5db1590cagaUCTuu6Mh2E_3BIFP2MQgj_BC0ukAfcal5bqKJcWgXI8uB-Czu8ME9i6hLlR0Yn";
+  const routeUrl = "https://route-api.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World";
   const stops = [];
   const polylineBarriers = [];
-
-  var constructionSet = new FeatureSet();
-  constructionSet = FeatureSet.fromJSON(json);
-  console.log(constructionSet.features[0].geometry);
-
-  for (let i = 0; i < json.features.length; i++) {
-    let obj = json.features[i];
-    polylineBarriers.push(
-      new PolylineBarrier({
-        barrierType: "restriction",
-        geometry: obj.geometry,
-      })
-    );
-  }
-
   const routeLayer = new RouteLayer({});
-  routeLayer.stops = stops;
-  routeLayer.polylineBarriers = polylineBarriers;
+  var logicDelegation = document.getElementById("title").text;
 
-  const tornado = [];
-  for(let i = 0; i < tornadoData.length ; i++){
-    tornado.push(new PolygonBarrier({
-      barrierType: "restriction",
-      geometry: tornadoData[i].geometry,
-    }));
+  if(logicDelegation === 'construction'){
+    
+    for (let i = 0; i < construction.features.length; i++) {
+      let obj = construction.features[i];
+      polylineBarriers.push(
+        new PolylineBarrier({
+          barrierType: "restriction",
+          geometry: obj.geometry,
+        })
+      );
+    }
+    routeLayer.stops = stops;
+    routeLayer.polylineBarriers = polylineBarriers;    
+    
+  }else if(logicDelegation === 'Flood'){
+    console.log("check");
+    routeLayer.stops = stops;
+    routeLayer.polygonBarriers = floodedAreas;
+    
+  }else if(logicDelegation === 'Tornado'){
+    routeLayer.stops = stops;
+    routeLayer.polygonBarriers = tornadoData;
+
+  }else{
+    routeLayer.stops = stops;
+    routeLayer.polylineBarriers = snowData;
   }
-
-  routeLayer.polygonBarriers = tornado;
-
-  console.log(routeLayer.polygonBarriers.length);
-
 
   const map = new Map({
-    //Default Map Service Provided by ArcGIS
     basemap: "arcgis-navigation",
     layers: routeLayer,
   });
@@ -631,7 +745,6 @@ require([
   const view = new MapView({
     container: "viewDiv",
     map: map,
-    //coordinates in Long/Lat
     center: [-75.690966, 45.407608],
     zoom: 13,
   });
