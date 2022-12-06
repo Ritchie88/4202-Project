@@ -1,10 +1,129 @@
 <html>
     <H1 style="text-align:center">Event Simulation Directions & GPS</H1>
-    <a href="/construction"> Construction layer</a>
-    <br>
-    <a href="/tornado">Tornado Event</a>
-    <br>
-    <a href="/flood">Flood Event</a>
-    <br>
-    <a href="/snow"> Snow Event</a>
+    <body>
+        <body>
+            <div class="container">        
+              <article class="section">
+                <div class="section_number">01</div>
+                <div class="section_content">
+                  <a class="title" href="/construction">Construction</a>
+                  <div class="story">
+                    <p>In-progress construction around Ottawa</p>
+                    <br>
+                    <p>Data retrieved from Open Ottawa</p>
+                  </div>
+                </div>
+              </article>
+              
+              <article class="section">
+                <div class="section_number">02</div>
+                <div class="section_content">
+                    <a class="title" href="/snow">Snow</a>
+                  <div class="story">
+                    <p>Modeled data of a low priority residential neighbourhood after a snowstorm</p>
+                    <br>
+                    <p>Data based on our research from government plow schedules</p>
+                  </div>
+                </div>
+              </article>
+
+              <article class="section">
+                <div class="section_number">03</div>
+                <div class="section_content">
+                    <a class="title" href="/flood">Flood</a>
+                  <div class="story">
+                    <p>Modeled data of some flood-risk areas around Ottawa</p>
+                    <br>
+                    <p>Data models the effects of significant percipitation in low topographic/drainage areas</p>
+                  </div>
+                </div>
+              </article>
+
+              <article class="section">
+                <div class="section_number">04</div>
+                <div class="section_content">
+                    <a class="title" href="/tornado">Tornado</a>
+                  <div class="story">
+                    <p>Modeled data of a tornado weather event</p>
+                    <br>
+                    <p>Based on previous Tornado paths/affected areas of similar events</p>
+                  </div>
+                </div>
+              </article>
+    </body>
+    <Style>
+        *,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background: #444;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+}
+
+p {
+  margin: 0 0 13px 0;
+}
+
+a {
+  color: #fff;
+}
+
+.center { text-align: center; }
+
+.container {
+  width: 95%;
+  max-width: 1220px;
+  margin: 0 auto;
+}
+
+.section {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  position: relative;
+}
+
+.section_number {
+  font-size: 10vw;
+  font-weight: 600;
+  padding: 10px 0;
+  position: sticky;
+  top: 0;
+  text-align: center;
+  height: calc(10vw + 20px);
+  transition: all 0.2s ease-in;
+}
+
+.section_content {
+  border-top: 2px solid #fff;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-gap: 10px;
+  padding: 15px 0;
+}
+
+.section_content .title {
+  font-weight: 600
+}
+
+.section_content .story {
+  line-height: 26px;
+}
+
+@media (max-width: 600px) {
+  .episode__content {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .episode__content .story {
+    font-size: 15px;
+  }
+}
+    </Style>
 </html> 
